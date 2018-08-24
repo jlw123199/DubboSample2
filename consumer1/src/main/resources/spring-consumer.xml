@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!-- 添加 DUBBO SCHEMA -->
+    <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+<!-- 应用名 -->
+<dubbo:application name="dubboapp-consumer"/>
+<!-- 连接到哪个注册中心（连接到本机的2181端口zookeeper） -->
+<dubbo:registry address="zookeeper://localhost:2181"/>
+<!--<dubbo:registry id="dubboapp" address="multicast://224.0.0.1:1234?unicast=false" />-->
+
+<!-- 消费方用什么协议获取服务（用dubbo协议在20880端口暴露服务） -->
+<dubbo:protocol port="28081"/>
+<!-- 提供哪些接口给消费者调用 -->
+<dubbo:reference id="userService" interface="xl.com.dubboapp.api.IUserService" group="imp1"  />
+<dubbo:reference id="userService2" interface="xl.com.dubboapp.api.IUserService" group="imp2"/>
+
+
+</beans>
